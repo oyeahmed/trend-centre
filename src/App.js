@@ -1,17 +1,15 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Homepage from "./pages/Homepage";
-import Orders from "./pages/Orders";
 import Products from "./pages/Products";
 import Category from "./pages/Category";
-import SiteHeader from "./components/SiteHeader";
-import Topbar from "./components/TopBar";
+import Appbar from "./components/AppBar";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Topbar />
+        <Appbar />
 
         <Switch>
           <Route exact path="/">
@@ -24,10 +22,6 @@ function App() {
 
           <Route path="/Categories">
             <Category />
-          </Route>
-
-          <Route path="/Orders">
-            <Orders />
           </Route>
         </Switch>
       </div>

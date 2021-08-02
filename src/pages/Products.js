@@ -1,10 +1,7 @@
 import UseFetch from "../hooks/UseFetch";
-import StarRatings from "../components/StarRating";
-import Rating from "@material-ui/lab/Rating";
-import Box from "@material-ui/core/Box";
 
 export default function Products() {
-  const { loading, error, data } = UseFetch("http://localhost:1337/Featureds");
+  const { loading, error, data } = UseFetch("http://localhost:1337/Products");
 
   if (loading) return <p>Loading...</p>;
 
@@ -30,14 +27,6 @@ export default function Products() {
                 {Product.original_price}$
               </del>
             </p>
-            <Box
-              component="fieldset"
-              mb={3}
-              borderColor="transparent"
-              style={{ margin: 0, padding: 0 }}
-            >
-              <Rating name="read-only" value={3} readOnly />
-            </Box>
           </div>
         </div>
       ))}
