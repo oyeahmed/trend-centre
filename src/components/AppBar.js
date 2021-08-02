@@ -39,7 +39,9 @@ export default function ButtonAppBar() {
               Trend Center
             </Button>
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button href="/Login" color="inherit">
+            Login
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
