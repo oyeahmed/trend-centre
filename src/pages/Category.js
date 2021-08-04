@@ -1,5 +1,6 @@
 import React from "react";
 import UseFetch from "../hooks/UseFetch";
+import Prod from "../components/Prod";
 
 export default function category() {
   const { loading, error, data } = UseFetch("http://localhost:1337/Categories");
@@ -11,20 +12,10 @@ export default function category() {
   return (
     <div>
       {data.map((Categories) => (
-        <div key={Categories.id} className="categories-card">
-          <div className="categories">
-            <h1 style={{ textAlign: "Center" }}>{Categories.name}</h1>
-            <h3>{Categories.products[0].title}</h3>
-            <p>{Categories.products[0].description}</p>
-            <p>
-              Price:
-              <span style={{ marginLeft: "10px" }}>
-                {Categories.products[0].discount_price}$
-              </span>
-              <del style={{ color: "red", marginLeft: "10px" }}>
-                {Categories.products[0].original_price}$
-              </del>
-            </p>
+        <div key={Categories.id}>
+          <h1 style={{ textAlign: "Center" }}>{Categories.name}</h1>
+          <div>
+            <Prod obj={Categories} />
           </div>
         </div>
       ))}

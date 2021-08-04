@@ -1,34 +1,52 @@
 import UseFetch from "../hooks/UseFetch";
+import ProductsCard from "../components/ProductsCard";
+import { useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export default function Products() {
+  let [isAdmin, setIsAdmin] = useState(false);
+  let [isUser, setIsUser] = useState(false);
+  let [token, settoken] = useState(null);
+  let [userRole, setUserRole] = useState(null);
+  let history = useHistory();
+
+  useEffect(() => {
+    settoken(localStorage.getItem("token"));
+    setUserRole(localStorage.getItem("role"));
+    if (token !== null) {
+      setIsUser(true);
+      if (userRole === "authenticated") {
+        setIsAdmin(true);
+      }
+    }
+    console.log(userRole);
+  }, [token, userRole]);
+
   const { loading, error, data } = UseFetch("http://localhost:1337/Products");
-
   if (loading) return <p>Loading...</p>;
-
   if (error) return <p>Error...</p>;
 
   return (
     <div
-      style={{ display: "flex", flexDirection: "Column", marginLeft: "30px" }}
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        flexWrap: "wrap",
+      }}
     >
-      <h1 style={{ marginLeft: "auto", marginRight: "auto" }}>Products</h1>
       {data.map((Product) => (
-        <div key={Product.id} className="products-card">
-          <div className="products">
-            <h2>{Product.title}</h2>
-            <h4>Description</h4>
-            <p>{Product.description}</p>
-            <p>
-              Price:
-              <span style={{ marginLeft: "10px" }}>
-                {Product.discount_price}$
-              </span>
-              <del style={{ color: "red", marginLeft: "10px" }}>
-                {Product.original_price}$
-              </del>
-            </p>
-          </div>
-        </div>
+        <ProductsCard
+          title={Product.title}
+          id={Product.id}
+          p1={Product.original_price}
+          S
+          p2={Product.discount_price}
+          S
+          description={Product.description.substring(1, 120) + "..."}
+          image={Product.image[0].name}
+          isAdmin={isAdmin}
+        />
       ))}
     </div>
   );

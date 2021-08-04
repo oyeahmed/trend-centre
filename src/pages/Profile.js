@@ -1,35 +1,82 @@
-import UseFetch from "../hooks/UseFetch";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 export default function Profile() {
-  const { loading, error, data } = UseFetch("http://localhost:1337/Profile");
+  const history = useHistory();
+  const classes = useStyles();
+  const User = JSON.parse(localStorage.getItem("user"));
 
-  if (loading) return <p>Loading...</p>;
-
-  if (error) return <p>Error...</p>;
+  useEffect(() => {
+    if (localStorage.getItem("user") === null) history.push("/");
+  }, [history]);
 
   return (
-    <div
-      style={{ display: "flex", flexDirection: "Column", marginLeft: "30px" }}
-    >
-      <h1 style={{ marginLeft: "auto", marginRight: "auto" }}>Products</h1>
-      {data.map((Product) => (
-        <div key={Product.id} className="products-card">
-          <div className="products">
-            <h2>{Product.title}</h2>
-            <h4>Description</h4>
-            <p>{Product.description}</p>
-            <p>
-              Price:
-              <span style={{ marginLeft: "10px" }}>
-                {Product.discount_price}$
-              </span>
-              <del style={{ color: "red", marginLeft: "10px" }}>
-                {Product.original_price}$
-              </del>
-            </p>
+    <div>
+      {localStorage.length > 1 && (
+        <div style={{ borderRadius: "25px" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              minHeight: "100vh",
+            }}
+          >
+            <Card className={classes.root}>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="h2"
+                style={{ textAlign: "center" }}
+              >
+                Profile
+              </Typography>
+              <CardContent>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                ></div>
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  component="p"
+                  color="primary"
+                  style={{ textAlign: "center" }}
+                >
+                  {User.username}
+                </Typography>
+                <Typography
+                  gutterBottom
+                  variant="subtitle2"
+                  component="p"
+                  color="primary"
+                  style={{ textAlign: "center" }}
+                >
+                  {User.email}
+                </Typography>
+              </CardContent>
+            </Card>
           </div>
         </div>
-      ))}
+      )}
     </div>
   );
 }
+
+const useStyles = makeStyles({
+  root: {
+    minWidth: 500,
+    padding: "20px",
+  },
+  media: {
+    height: 140,
+  },
+});

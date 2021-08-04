@@ -5,14 +5,14 @@ import Products from "./pages/Products";
 import Category from "./pages/Category";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import Appbar from "./components/AppBar";
+import ProductDetails from "./pages/ProductDetails";
+import AppBar from "./components/AppBar";
 
 function App() {
   return (
     <Router>
+      <AppBar />
       <div className="App">
-        <Appbar />
-
         <Switch>
           <Route exact path="/">
             <Homepage />
@@ -32,6 +32,10 @@ function App() {
 
           <Route exact path="/Profile">
             <Profile />
+          </Route>
+
+          <Route exact path="/Products/:id">
+            <ProductDetails />
           </Route>
         </Switch>
       </div>
