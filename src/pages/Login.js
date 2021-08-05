@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -20,6 +20,12 @@ export default function Login() {
   let history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (localStorage.getItem("token") !== null) {
+      history.goBack();
+    }
+  }, [history]);
 
   function login() {
     console.log(email, password);

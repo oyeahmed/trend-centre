@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 
 export default function ProductsCard({
   details,
+  inner,
   id,
   image,
   title,
@@ -25,47 +26,49 @@ export default function ProductsCard({
   return (
     <Card className={details ? classes.details : classes.root}>
       <img
-        style={{ height: "320px", width: "250px" }}
+        style={{ height: "500px", width: "400px" }}
         src={image}
         alt="image"
       />
-      <CardHeader title={title} style={{ textAlign: "center" }} />
-      <CardContent>
-        <ul
-          style={{
-            display: "flex",
-            listStyleType: "none",
-            padding: 0,
-            margin: 0,
-          }}
-        ></ul>
-        <Typography
-          style={{ textAlign: "justify" }}
-          variant="body2"
-          color="textSecondary"
-          component="p"
-        >
-          {description}
-        </Typography>
-        <Link
-          to={`/products/${id}`}
-          style={{ textDecoration: "none", padding: 0, margin: 0 }}
-        >
-          {!details && (
-            <Typography
-              style={{ textAlign: "justify", marginBottom: "10px" }}
-              variant="body2"
-              color="textPrimary"
-              component="p"
-            >
-              See More
-            </Typography>
-          )}
-        </Link>
-        <Typography style={{ textAlign: "left" }}>
-          ${p2}, <del style={{ color: "red" }}>${p1}</del>
-        </Typography>
-      </CardContent>
+      <div className={inner ? classes.details : classes.root}>
+        <CardHeader title={title} />
+        <CardContent>
+          <ul
+            style={{
+              display: "flex",
+              listStyleType: "none",
+              padding: 0,
+              margin: 0,
+            }}
+          ></ul>
+          <Typography
+            style={{ textAlign: "justify" }}
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
+            {description}
+          </Typography>
+          <Link
+            to={`/products/${id}`}
+            style={{ textDecoration: "none", padding: 0, margin: 0 }}
+          >
+            {!details && (
+              <Typography
+                style={{ textAlign: "justify", marginBottom: "10px" }}
+                variant="body2"
+                color="textPrimary"
+                component="p"
+              >
+                See More
+              </Typography>
+            )}
+          </Link>
+          <Typography style={{ textAlign: "left" }}>
+            ${p2}, <del style={{ color: "red" }}>${p1}</del>
+          </Typography>
+        </CardContent>
+      </div>
       {isAdmin && (
         <CardActions disableSpacing>
           <IconButton style={{ color: "blue" }}>
@@ -87,11 +90,12 @@ const useStyles = makeStyles((theme) => ({
     margin: "10px",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
   },
   details: {
+    display: "flex",
     margin: "10px",
     padding: "10px",
     maxWidth: "70vw",
   },
+  inner: { flexDirection: "column" },
 }));

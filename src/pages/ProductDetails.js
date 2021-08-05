@@ -45,7 +45,7 @@ export default function ProductDetails() {
       <AppBar />
       <div
         style={{
-          marginTop: "70px",
+          marginTop: "30px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

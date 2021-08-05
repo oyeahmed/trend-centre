@@ -1,4 +1,3 @@
-// import { AppBar } from "@material-ui/core";
 import AppBar from "../components/AppBar";
 
 export default function Homepage() {
