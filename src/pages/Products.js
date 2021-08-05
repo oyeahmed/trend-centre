@@ -2,6 +2,7 @@ import UseFetch from "../hooks/UseFetch";
 import ProductsCard from "../components/ProductsCard";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
+import AppBar from "../components/AppBar";
 
 export default function Products() {
   let [isAdmin, setIsAdmin] = useState(false);
@@ -27,27 +28,34 @@ export default function Products() {
   if (error) return <p>Error...</p>;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        flexWrap: "wrap",
-      }}
-    >
-      {data.map((Product) => (
-        <ProductsCard
-          title={Product.title}
-          id={Product.id}
-          p1={Product.original_price}
-          S
-          p2={Product.discount_price}
-          S
-          description={Product.description.substring(1, 120) + "..."}
-          image={Product.image[0].name}
-          isAdmin={isAdmin}
-        />
-      ))}
+    <div>
+      <AppBar />
+      <h1 style={{ textAlign: "center", color: "#3f51b5", marginTop: "30px" }}>
+        Products
+      </h1>
+      ;
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          flexWrap: "wrap",
+        }}
+      >
+        {data.map((Product) => (
+          <ProductsCard
+            title={Product.title}
+            id={Product.id}
+            p1={Product.original_price}
+            S
+            p2={Product.discount_price}
+            S
+            description={Product.description.substring(1, 120) + "..."}
+            image={Product.image[0].name}
+            isAdmin={isAdmin}
+          />
+        ))}
+      </div>
     </div>
   );
 }

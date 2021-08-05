@@ -1,9 +1,10 @@
-import { AppBar } from "@material-ui/core";
+// import { AppBar } from "@material-ui/core";
+import AppBar from "../components/AppBar";
 
-const Homepage = () => {
+export default function Homepage() {
   return (
     <div>
-      <AppBar products="true" />
+      <AppBar />
       <div
         style={{
           marginTop: "100px",
@@ -30,6 +31,4 @@ const Homepage = () => {
       </div>
     </div>
   );
-};
-
-export default Homepage;
+}

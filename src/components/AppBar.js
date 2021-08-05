@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const [auth, setAuth] = React.useState(true);
+  const token = localStorage.getItem("token");
 
   const classes = useStyles();
   const handleChange = (event) => {
@@ -50,9 +52,34 @@ export default function ButtonAppBar() {
               Categories
             </Button>
           </Typography>
-          <Button href="/Login" color="inherit">
-            Login
-          </Button>
+
+          {token ? (
+            <div>
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                color="inherit"
+                href="/profile"
+              >
+                <AccountCircle />
+              </IconButton>
+
+              <Button
+                href="/Login"
+                color="inherit"
+                onClick={() => {
+                  localStorage.clear();
+                }}
+              >
+                Logout
+              </Button>
+            </div>
+          ) : (
+            <Button href="/Login" color="inherit">
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </div>

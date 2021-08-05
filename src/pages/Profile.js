@@ -5,6 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import AppBar from "../components/AppBar";
 
 export default function Profile() {
   const history = useHistory();
@@ -17,6 +18,7 @@ export default function Profile() {
 
   return (
     <div>
+      <AppBar />
       {localStorage.length > 1 && (
         <div style={{ borderRadius: "25px" }}>
           <div

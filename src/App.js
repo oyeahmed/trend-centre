@@ -6,12 +6,11 @@ import Category from "./pages/Category";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import ProductDetails from "./pages/ProductDetails";
-import AppBar from "./components/AppBar";
 
 function App() {
   return (
     <Router>
-      <AppBar />
+      {/* <AppBar /> */}
       <div className="App">
         <Switch>
           <Route exact path="/">

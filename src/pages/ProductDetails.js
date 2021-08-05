@@ -3,6 +3,7 @@ import UseFetch from "../hooks/UseFetch";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useEffect, useState } from "react";
 import ProductsCard from "../components/ProductsCard";
+import AppBar from "../components/AppBar";
 
 export default function ProductDetails() {
   let { id } = useParams();
@@ -41,6 +42,7 @@ export default function ProductDetails() {
 
   return (
     <div>
+      <AppBar />
       <div
         style={{
           marginTop: "70px",

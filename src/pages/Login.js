@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import AppBar from "../components/AppBar";
 
 export default function Login() {
   const classes = useStyles();
@@ -41,6 +42,7 @@ export default function Login() {
 
   return (
     <div>
+      <AppBar />
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} className={classes.image} />
