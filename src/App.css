@@ -15,11 +15,7 @@ h4 {
   font-size: 1.2em;
   box-sizing: border-box;
 }
-a {
-  text-decoration: none;
-  color: #8e2ad6;
-  border-bottom: 1px dotted;
-}
+
 .site-header h1 {
   font-size: 1.5em;
   color: #8e2ad6;

@@ -44,15 +44,15 @@ export default function Products() {
       >
         {data.map((Product) => (
           <ProductsCard
+            key={Product.id}
             title={Product.title}
             id={Product.id}
             p1={Product.original_price}
             S
             p2={Product.discount_price}
             S
-            description={Product.description.substring(1, 120) + "..."}
             image={Product.image[0].name}
-            isAdmin={isAdmin}
+            token={token}
           />
         ))}
       </div>

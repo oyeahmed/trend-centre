@@ -7,7 +7,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import ProductDetails from "./pages/ProductDetails";
 
-function App() {
+export default function App() {
   return (
     <Router>
       {/* <AppBar /> */}
@@ -41,5 +41,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;

@@ -3,18 +3,23 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import AppBar from "../components/AppBar";
+// import UseFetch from "../hooks/UseFetch";
 
 export default function Profile() {
   const history = useHistory();
   const classes = useStyles();
+  // const { loading, error, data } = UseFetch("http://localhost:1337/users/me");
   const User = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     if (localStorage.getItem("token") === null) history.push("/login");
   }, [history]);
+
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error...</p>;
 
   return (
     <div>

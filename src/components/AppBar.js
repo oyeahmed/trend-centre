@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,7 +44,7 @@ export default function ButtonAppBar() {
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             <Button href="/" color="inherit">
-              Trend Center
+              Home
             </Button>
             <Button href="/products" color="inherit">
               Products
@@ -55,6 +56,9 @@ export default function ButtonAppBar() {
 
           {token ? (
             <div>
+              <IconButton color="inherit" href="/">
+                <AddIcon />
+              </IconButton>
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
