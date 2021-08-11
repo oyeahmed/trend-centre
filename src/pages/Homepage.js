@@ -1,6 +1,8 @@
 import AppBar from "../components/AppBar";
 
 export default function Homepage() {
+  const token = localStorage.getItem("token");
+  const User = JSON.parse(localStorage.getItem("user"));
   return (
     <div>
       <AppBar />
@@ -13,7 +15,8 @@ export default function Homepage() {
           flexDirection: "column",
         }}
       >
-        <h1>
+        {token ? <h1>{`Hi ${User.username}!`}</h1> : <h1>Hi User!</h1>}
+        <h2>
           Welcome to{" "}
           <span
             style={{
@@ -26,7 +29,7 @@ export default function Homepage() {
           >
             Trend Centre!
           </span>
-        </h1>
+        </h2>
       </div>
     </div>
   );

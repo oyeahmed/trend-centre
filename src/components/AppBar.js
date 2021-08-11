@@ -8,6 +8,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import AddIcon from "@material-ui/icons/Add";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,9 +82,17 @@ export default function ButtonAppBar() {
               </Button>
             </div>
           ) : (
-            <Button href="/Login" color="inherit">
-              Login
-            </Button>
+            <div>
+              <Button href="/Favourites" color="inherit">
+                <FavoriteIcon />
+              </Button>
+              <Button href="/Cart" color="inherit">
+                <ShoppingCartOutlinedIcon />
+              </Button>
+              <Button href="/Login" color="inherit">
+                Login
+              </Button>
+            </div>
           )}
         </Toolbar>
       </AppBar>

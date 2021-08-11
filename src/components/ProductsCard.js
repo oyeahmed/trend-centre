@@ -11,17 +11,26 @@ import { Link } from "react-router-dom";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ShareIcon from "@material-ui/icons/Share";
+import axios from "axios";
 
 export default function ProductsCard({ id, image, title, p1, p2, token }) {
   const classes = useStyles();
 
+  function addToCart(id) {
+    // const addcart = { cart: 1 };
+    axios
+      .post(`http://localhost:1337/Carts`, { p_id: id })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <Card className={classes.root}>
-      <img
-        style={{ height: "500px", width: "400px" }}
-        src={image}
-        alt="image"
-      />
+      <img style={{ height: "20em", width: "17em" }} src={image} alt="image" />
       <div className={classes.root}>
         <CardContent>
           <Link
@@ -45,7 +54,8 @@ export default function ProductsCard({ id, image, title, p1, p2, token }) {
           ></ul>
 
           <Typography style={{ textAlign: "left" }}>
-            ${p2}, <del style={{ color: "red" }}>${p1}</del>
+            <span style={{ color: "green" }}>${p2}</span>
+            <del style={{ color: "red", marginLeft: "10px" }}>${p1}</del>
           </Typography>
         </CardContent>
         {token ? (
@@ -59,7 +69,7 @@ export default function ProductsCard({ id, image, title, p1, p2, token }) {
           </div>
         ) : (
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <IconButton style={{ color: "blue" }} href="/login">
+            <IconButton style={{ color: "blue" }} onClick={() => addToCart(id)}>
               <ShoppingCartOutlinedIcon />
             </IconButton>
             <IconButton style={{ color: "blue" }} href="/login">

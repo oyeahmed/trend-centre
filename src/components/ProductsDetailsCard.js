@@ -2,15 +2,11 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import Ratings from "./Ratings";
-import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import ShareIcon from "@material-ui/icons/Share";
-import IconButton from "@material-ui/core/IconButton";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import Button from "@material-ui/core/Button";
 
 export default function ProductsDetailsCard({
   inner,
@@ -22,6 +18,11 @@ export default function ProductsDetailsCard({
   p2,
 }) {
   const classes = useStyles();
+
+  function addToCart(id) {
+    const addcart = { cart: 1 };
+    axios.put(`http://localhost:1337/Products/${id}`, addcart);
+  }
 
   return (
     <Card className={classes.root}>
@@ -35,9 +36,26 @@ export default function ProductsDetailsCard({
             {title}
           </h2>
           <Typography style={{ textAlign: "left" }}>
-            ${p2}, <del style={{ color: "red" }}>${p1}</del>
+            <span style={{ color: "green" }}>${p2}</span>
+            <del style={{ color: "red", marginLeft: "10px" }}>${p1}</del>
           </Typography>
           <Ratings></Ratings>
+          <div style={{ marginTop: "8px", marginBottom: "15px" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => addToCart(id)}
+            >
+              Add to Cart
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ marginLeft: "8px" }}
+            >
+              Buy Now
+            </Button>
+          </div>
           <Typography
             style={{ textAlign: "justify" }}
             variant="body2"

@@ -6,6 +6,7 @@ import Category from "./pages/Category";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
 
 export default function App() {
   return (
@@ -23,6 +24,10 @@ export default function App() {
 
           <Route path="/Categories">
             <Category />
+          </Route>
+
+          <Route path="/Cart">
+            <Cart />
           </Route>
 
           <Route exact path="/Login">
