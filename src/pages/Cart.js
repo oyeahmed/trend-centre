@@ -1,6 +1,8 @@
 import AppBar from "../components/AppBar";
 import UseFetch from "../hooks/UseFetch";
 import ProductsCard from "../components/ProductsCard";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function Cart() {
   const { loading, error, data } = UseFetch("http://localhost:1337/Carts");
@@ -19,17 +21,24 @@ export default function Cart() {
           marginTop: "10px",
         }}
       >
-        {data.map((cartProduct) => (
-          <ProductsCard
-            // key={cartProduct.products[0].id}
-            // title={cartProduct.products[0].title}
-            // id={cartProduct.products[0].id}
-            // p1={cartProduct.products[0].original_price}
-            // p2={cartProduct.products[0].discount_price}
-            // image={cartProduct.products[0].image[0].name}
-            // token={cartProduct.products[0].token}
-          />
-        ))}
+        {!data && data[0].products[0].add_to_cart ? (
+          data.map((cartProduct) => (
+            <ProductsCard
+              key={cartProduct.products[0].id}
+              title={cartProduct.products[0].title}
+              id={cartProduct.products[0].id}
+              p1={cartProduct.products[0].original_price}
+              S
+              p2={cartProduct.products[0].discount_price}
+              S
+              image={cartProduct.products[0].image[0].name}
+            />
+          ))
+        ) : (
+          <div>
+            <h1>Cart is Empty</h1>
+          </div>
+        )}
       </div>
     </div>
   );

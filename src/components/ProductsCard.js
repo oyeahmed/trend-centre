@@ -13,15 +13,25 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ShareIcon from "@material-ui/icons/Share";
 import axios from "axios";
 
-export default function ProductsCard({ id, image, title, p1, p2, token }) {
+export default function ProductsCard({
+  id,
+  image,
+  title,
+  p1,
+  p2,
+  token,
+  addToCart,
+}) {
   const classes = useStyles();
 
   function addToCart(id) {
-    // const addcart = { cart: 1 };
     axios
-      .post(`http://localhost:1337/Carts`, { p_id: id })
+      .put(`http://localhost:1337/products/${id}`, { add_to_cart: true })
       .then((response) => {
-        console.log(response);
+        axios.post("http://localhost:1337/carts", {
+          products: [response.data],
+        });
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
