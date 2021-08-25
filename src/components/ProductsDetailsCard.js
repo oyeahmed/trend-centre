@@ -20,8 +20,17 @@ export default function ProductsDetailsCard({
   const classes = useStyles();
 
   function addToCart(id) {
-    const addcart = { cart: 1 };
-    axios.put(`http://localhost:1337/Products/${id}`, addcart);
+    axios
+      .put(`http://localhost:1337/products/${id}`, { add_to_cart: true })
+      .then((response) => {
+        axios.post("http://localhost:1337/carts", {
+          products: [response.data],
+        });
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (

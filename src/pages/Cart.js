@@ -1,8 +1,6 @@
 import AppBar from "../components/AppBar";
 import UseFetch from "../hooks/UseFetch";
 import ProductsCard from "../components/ProductsCard";
-import { useParams } from "react-router-dom";
-import axios from "axios";
 
 export default function Cart() {
   const { loading, error, data } = UseFetch("http://localhost:1337/Carts");
@@ -21,7 +19,7 @@ export default function Cart() {
           marginTop: "10px",
         }}
       >
-        {!data && data[0].products[0].add_to_cart ? (
+        {data[0] && data[0].products[0].add_to_cart ? (
           data.map((cartProduct) => (
             <ProductsCard
               key={cartProduct.products[0].id}
@@ -35,9 +33,7 @@ export default function Cart() {
             />
           ))
         ) : (
-          <div>
-            <h1>Cart is Empty</h1>
-          </div>
+          <h1>Cart is empty</h1>
         )}
       </div>
     </div>
