@@ -10,6 +10,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import AddIcon from "@material-ui/icons/Add";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import Badge from "@material-ui/core/Badge";
+import UseFetch from "../hooks/UseFetch";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ButtonAppBar() {
+  const { loading, error, data } = UseFetch("http://localhost:1337/Carts");
+
   const [auth, setAuth] = React.useState(true);
   const token = localStorage.getItem("token");
 
@@ -31,7 +35,8 @@ export default function ButtonAppBar() {
   const handleChange = (event) => {
     setAuth(event.target.checked);
   };
-
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error...</p>;
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -87,7 +92,9 @@ export default function ButtonAppBar() {
                 <FavoriteIcon />
               </Button>
               <Button href="/Cart" color="inherit">
-                <ShoppingCartOutlinedIcon />
+                <Badge color="secondary" badgeContent={data.length}>
+                  <ShoppingCartOutlinedIcon />
+                </Badge>
               </Button>
               <Button href="/Login" color="inherit">
                 Login

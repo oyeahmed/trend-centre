@@ -4,23 +4,12 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 import { Link } from "react-router-dom";
-import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ShareIcon from "@material-ui/icons/Share";
 import axios from "axios";
 
-export default function ProductsCard({
-  id,
-  image,
-  title,
-  p1,
-  p2,
-  token,
-  addToCart,
-}) {
+export default function CartCard({ id, image, title, p1, p2, addToCart }) {
   const classes = useStyles();
 
   function addToCart(id) {
@@ -30,6 +19,7 @@ export default function ProductsCard({
         axios.post("http://localhost:1337/carts", {
           products: [response.data],
         });
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -66,28 +56,6 @@ export default function ProductsCard({
             <del style={{ color: "red", marginLeft: "10px" }}>${p1}</del>
           </Typography>
         </CardContent>
-        {token ? (
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <IconButton style={{ color: "red" }}>
-              <DeleteIcon />
-            </IconButton>
-            <IconButton style={{ color: "blue" }}>
-              <EditIcon />
-            </IconButton>
-          </div>
-        ) : (
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <IconButton style={{ color: "blue" }} onClick={() => addToCart(id)}>
-              <ShoppingCartOutlinedIcon />
-            </IconButton>
-            <IconButton style={{ color: "blue" }} href="/login">
-              <FavoriteBorderIcon />
-            </IconButton>
-            <IconButton style={{ color: "blue" }} href="/login">
-              <ShareIcon />
-            </IconButton>
-          </div>
-        )}
       </div>
     </Card>
   );
